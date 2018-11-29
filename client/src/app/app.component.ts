@@ -17,7 +17,7 @@ export class AppComponent {
   }
 
   testAPI() {
-  	this.http.get('http://localhost:4000/api/v1/pages')
+  	this.http.get('/api/v1/pages')
   	.map(res => res.json())
   	.subscribe(
   		res => {

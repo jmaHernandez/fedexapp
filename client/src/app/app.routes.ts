@@ -3,6 +3,7 @@ import { Routes } from '@angular/router'
 // Components
 import { HomeComponent } from './components/home/home.component';
 import { ReportComponent } from './components/report/report.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const AppRoutes: Routes = [
     {
@@ -17,5 +18,9 @@ export const AppRoutes: Routes = [
     {
         path: 'report',
         component: ReportComponent
+    },
+    {
+    	path: '**',
+    	component: PageNotFoundComponent
     }
 ];

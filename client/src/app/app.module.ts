@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReportComponent } from './components/report/report.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 // Routes
 import { AppRoutes } from './app.routes';
@@ -15,7 +16,8 @@ import { AppRoutes } from './app.routes';
   declarations: [
     AppComponent,
     HomeComponent,
-    ReportComponent
+    ReportComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

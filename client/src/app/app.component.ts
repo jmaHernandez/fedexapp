@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
-import { Http } from '@angular/http';
-
-import 'rxjs/add/operator/map';
+// Services
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +11,13 @@ import 'rxjs/add/operator/map';
 export class AppComponent {
   title = 'app';
 
-  constructor(private http: Http) {
+  constructor(private api: ApiService) {
   	this.testAPI();
   }
 
   testAPI() {
-  	this.http.get('/api/v1/pages')
-  	.map(res => res.json())
-  	.subscribe(
-  		res => {
+  	this.api.testAPI().subscribe(res => {
 			console.log(res);
-        }
-    );
+    });
   }
 }

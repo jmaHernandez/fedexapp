@@ -1,6 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 
+// Services
+import { ApiService } from '../../services/api.service';
+
 declare const $: any;
 
 @Component({
@@ -14,13 +17,13 @@ export class HomeComponent {
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private api: ApiService, private fb: FormBuilder) {
     this.createForm();
   }
 
   createForm() {
     this.form = this.fb.group({
-      packets: [ '', Validators.required ]
+      packages: [ '', Validators.required ]
     });
   }
 
@@ -46,8 +49,10 @@ export class HomeComponent {
 
     let data: FormData = new FormData();
 
-    data.append('packets', value.packets);
+    data.append('packages', this.file);
 
-    console.log(data.get('packets'));
+    this.api.uploadPackages(data).subscribe(res => {
+      console.log(res);
+    })
   }
 }

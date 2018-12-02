@@ -1,6 +1,8 @@
 # require 'fedex'
 
 class Api::V1::PagesController < ApplicationController
+	skip_before_action :verify_authenticity_token
+
 	def index
 		shipper = { :name => "Sender",
             :company => "Company",
@@ -27,11 +29,6 @@ class Api::V1::PagesController < ApplicationController
 		  :weight => {:units => "LB", :value => 4},
 		  :dimensions => {:length => 10, :width => 5, :height => 4, :units => "IN" }
 		}
-		
-		packages << {
-		  :weight => {:units => "LB", :value => 6},
-		  :dimensions => {:length => 5, :width => 5, :height => 4, :units => "IN" }
-		}
 
 		shipping_options = {
 		  :packaging_type => "YOUR_PACKAGING",
@@ -52,8 +49,13 @@ class Api::V1::PagesController < ApplicationController
                   :service_type => "FEDEX_GROUND",
                   :shipping_options => shipping_options)
 
-		p rate
+		render :json => rate
+	end
 
-		render :json => { :name => "any name" }
+	def uploadPackages
+		file = params[:packages].read
+		data = JSON.parse(file)
+		  
+		render :json => data
 	end
 end

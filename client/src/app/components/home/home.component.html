@@ -4,10 +4,10 @@
 		
 		<form [formGroup]="form" (ngSubmit)="import(form.value)">
 			<div class="form-group">
-				<label for="packets">Packets</label>
-				<input type="file" accept=".json" id="packets" formControlName="packets" class="form-control-file" #fileInput>
+				<label for="packages">Packages</label>
+				<input type="file" accept=".json" id="packages" formControlName="packages" class="form-control-file" #fileInput>
 			</div>
-			<button type="submit" [disabled]="form.invalid" class="btn btn-success">Import</button>    
+			<button type="submit" [disabled]="form.invalid" class="btn btn-success">Import</button>
 		</form>
   </div>
 </div>

@@ -4,6 +4,9 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
+// Services
+import { ApiService } from './services/api.service';
+
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -26,7 +29,11 @@ import { AppRoutes } from './app.routes';
     RouterModule.forRoot(AppRoutes),
     ReactiveFormsModule 
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    ApiService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 		namespace :v1 do
 			get 'pages/test', to: 'pages#test'
 			post 'pages/uploadPackages', to: 'pages#uploadPackages'
+			get 'pages/getPackages', to: 'pages#getPackages'
 		end
 	end
 

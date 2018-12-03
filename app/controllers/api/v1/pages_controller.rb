@@ -147,4 +147,10 @@ class Api::V1::PagesController < ApplicationController
 		
 		render :json => Package.all
 	end
+
+	def getPackages
+		@packages = Package.all
+
+		render :json => @packages
+	end
 end

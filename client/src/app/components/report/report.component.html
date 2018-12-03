@@ -1,3 +1,28 @@
-<p>
-  report works!
-</p>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title mb-4">Imported Packages</h5>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Shipper</th>
+            <th scope="col">Recipient</th>
+            <th scope="col">Total Weight (Kg)</th>
+            <th scope="col">Total Charge (Kg)</th>
+            <th scope="col">Overweight (Kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let package of packages" [ngClass]="{ 'no-overweight': package.overweight == 0 }">
+            <td>{{ package.shipper }}</td>
+            <td>{{ package.recipient }}</td>
+            <td>{{ package.total_weight }}</td>
+            <td>{{ package.total_charge | number : '1.2-2' }}</td>
+            <td>{{ package.overweight }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

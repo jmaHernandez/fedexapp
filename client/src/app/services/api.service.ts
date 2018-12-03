@@ -20,4 +20,8 @@ export class ApiService {
   uploadPackages(data) {
     return this.http.post(`${ API_URL }/pages/uploadPackages`, data).map(res => res.json());
   }
+
+  getPackages() {
+    return this.http.get(`${ API_URL }/pages/getPackages`).map(res => res.json());
+  }
 }

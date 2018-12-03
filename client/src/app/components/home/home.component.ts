@@ -1,8 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 // Services
 import { ApiService } from '../../services/api.service';
+
 
 declare const $: any;
 
@@ -17,7 +19,7 @@ export class HomeComponent {
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private api: ApiService, private fb: FormBuilder) {
+  constructor(private api: ApiService, private fb: FormBuilder, private router: Router) {
     this.createForm();
   }
 
@@ -52,7 +54,7 @@ export class HomeComponent {
     data.append('packages', this.file);
 
     this.api.uploadPackages(data).subscribe(res => {
-      console.log(res);
+      this.router.navigate(['/report']);
     })
   }
 }

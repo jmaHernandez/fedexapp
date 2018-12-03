@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -13,17 +13,53 @@ declare const $: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   file: File;
 
   loading: boolean = false;
   showForm: boolean = true;
 
+  json: any[] = [];
+
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private api: ApiService, private fb: FormBuilder, private router: Router) {
     this.createForm();
+  }
+
+  ngOnInit() {
+    this.json = [
+      {
+        "weight": {
+          "units": "LB",
+          "value": 2
+        },
+        "dimensions": {
+          "length": 10,
+          "width": 5,
+          "height": 4,
+          "units": "IN"
+        }
+      },
+      {
+        "weight": {
+          "units": "LB",
+          "value": 6
+        },
+        "dimensions": {
+          "length": 5,
+          "width": 5,
+          "height": 4,
+          "units": "IN"
+        }
+      }
+    ];
+  }
+
+  ngAfterViewInit() {
+    let jsonFormat = JSON.stringify(this.json, null, 2);
+    $('#json').text(jsonFormat);
   }
 
   createForm() {

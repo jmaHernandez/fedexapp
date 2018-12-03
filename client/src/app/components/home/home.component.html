@@ -1,4 +1,4 @@
-<div *ngIf="loading" class="card">
+<div *ngIf="loading" class="card mb-4">
 	<div class="card-body">
 		<h5 class="card-title text-center mb-4">Loading</h5>
 
@@ -6,16 +6,26 @@
 	</div>
 </div>
 
-<div *ngIf="showForm" class="card">
-  <div class="card-body">
-		<h5 class="card-title mb-4">Import Packages</h5>
-		
-		<form [formGroup]="form" (ngSubmit)="import(form.value)">
+<div *ngIf="showForm">
+	<div class="card mb-4">
+		<div class="card-body">
+			<h5 class="card-title mb-4">Import Packages</h5>
+
+			<form [formGroup]="form" (ngSubmit)="import(form.value)">
 			<div class="form-group">
 				<label for="packages">Packages</label>
 				<input type="file" accept=".json" id="packages" formControlName="packages" class="form-control-file" #fileInput>
 			</div>
 			<button type="submit" [disabled]="form.invalid" class="btn btn-success">Import</button>
-		</form>
-  </div>
+			</form>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title mb-4">Json Example</h5>
+			
+			<pre id="json"></pre>
+		</div>
+	</div>
 </div>

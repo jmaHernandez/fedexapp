@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReportComponent } from './components/report/report.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 // Routes
 import { AppRoutes } from './app.routes';
@@ -21,7 +22,8 @@ import { AppRoutes } from './app.routes';
     AppComponent,
     HomeComponent,
     ReportComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

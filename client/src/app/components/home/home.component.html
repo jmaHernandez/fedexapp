@@ -1,4 +1,12 @@
-<div class="card">
+<div *ngIf="loading" class="card">
+	<div class="card-body">
+		<h5 class="card-title text-center mb-4">Loading</h5>
+
+		<app-loading></app-loading>
+	</div>
+</div>
+
+<div *ngIf="showForm" class="card">
   <div class="card-body">
 		<h5 class="card-title mb-4">Import Packages</h5>
 		

@@ -17,6 +17,9 @@ export class HomeComponent {
   form: FormGroup;
   file: File;
 
+  loading: boolean = false;
+  showForm: boolean = true;
+
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private api: ApiService, private fb: FormBuilder, private router: Router) {
@@ -53,7 +56,13 @@ export class HomeComponent {
 
     data.append('packages', this.file);
 
+    this.loading = true;
+    this.showForm = false;
+
     this.api.uploadPackages(data).subscribe(res => {
+      this.loading = false;
+      this.showForm = true;
+
       this.router.navigate(['/report']);
     })
   }

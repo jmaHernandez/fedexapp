@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'app';
 
   constructor(private api: ApiService) {
-  	this.testAPI();
+  	// this.testAPI();
   }
 
   testAPI() {

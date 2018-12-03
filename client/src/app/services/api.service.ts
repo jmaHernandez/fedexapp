@@ -14,7 +14,7 @@ export class ApiService {
   constructor(private http: Http) { }
 
   testAPI() {
-    return this.http.get(`${ this.pages }`).map(res => res.json());
+    return this.http.get(`${ this.pages }/test`).map(res => res.json());
   }
 
   uploadPackages(data) {

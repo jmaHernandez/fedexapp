@@ -132,17 +132,19 @@ class Api::V1::PagesController < ApplicationController
 			carga_total_lb = (rate[0].total_net_charge).to_f
 			carga_total = carga_total_lb / 2.2046
 
-			sobrepeso = carga_total - peso_total
+			sobrepeso = (carga_total - peso_total).ceil
 
-			package_list << {
-				:shipper => shipper[:name],
-				:recipient => recipient[:name],
-				:peso_total => peso_total.to_i,
-				:carga_total => carga_total.round(2),
-				:sobrepeso => sobrepeso.round(2)
-			}
+			@user = Package.new(
+				shipper: shipper[:name],
+				recipient: recipient[:name],
+				total_weight: peso_total,
+				total_charge: carga_total,
+				overweight: sobrepeso
+			)
+
+			@user.save
 		end
-		  
-		render :json => package_list
+		
+		render :json => Package.all
 	end
 end

@@ -18,6 +18,10 @@ Para ejecutar este proyecto de manera local es necesario descargar el repositori
 
 * http://localhost:4000/home
 
+# Archivo de ejemplo
+
+Para un ejemplo se puede usar el archivo fedex_packages_example.json para cargar la información en la app.
+
 Nota: Una vez que se ha descargado el proyecto y se han instalado las dependencias es muy probable que se tenga que crear la base de datos, para este paso en necesario ejecutar el siguiente comando:
 
 $ rake db:migrate

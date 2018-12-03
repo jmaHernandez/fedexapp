@@ -17,3 +17,7 @@ Heroku:
 Para ejecutar este proyecto de manera local es necesario descargar el repositori de github, colocarse dentro del directorio del proyecto y ejecutar el comando "bundle install", una vez que sea han terminado de instalar las dependencias tendremos que ejecutar el comando "rails s", una vez que la aplicación ha sido ejecutada, nos dirigimos a la siguiente url:
 
 * http://localhost:4000/home
+
+Nota: Una vez que se ha descargado el proyecto y se han instalado las dependencias es muy probable que se tenga que crear la base de datos, para este paso en necesario ejecutar el siguiente comando:
+
+$ rake db:migrate

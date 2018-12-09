@@ -31,26 +31,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.json = [
       {
+        "tracking_number": "449044304137821",
         "weight": {
           "units": "LB",
-          "value": 2
+          "value": 11.02
         },
         "dimensions": {
-          "length": 10,
-          "width": 5,
-          "height": 4,
+          "length": 17.71,
+          "width": 9.84,
+          "height": 7.87,
           "units": "IN"
         }
       },
       {
+        "tracking_number": "149331877648230",
         "weight": {
           "units": "LB",
-          "value": 6
+          "value": 2.20
         },
         "dimensions": {
-          "length": 5,
-          "width": 5,
-          "height": 4,
+          "length": 13,
+          "width": 9,
+          "height": 3,
           "units": "IN"
         }
       }

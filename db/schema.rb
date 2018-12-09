@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 2018_12_03_044225) do
     t.integer "total_weight"
     t.decimal "total_charge"
     t.integer "overweight"
+    t.string "numero_rastreo"
+    t.integer "peso_kilogramos"
+    t.integer "peso_volumetrico"
+    t.integer "peso_total"
+    t.integer "fedex_peso_kilogramos"
+    t.integer "fedex_peso_volumetrico"
+    t.integer "fedex_peso_total"
+    t.integer "sobrepeso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

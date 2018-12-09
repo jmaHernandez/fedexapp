@@ -18,7 +18,7 @@ export class ApiService {
   }
 
   uploadPackages(data) {
-    return this.http.post(`${ API_URL }/pages/uploadPackages`, data).map(res => res.json());
+    return this.http.post(`${ API_URL }/pages/uploadPackagesV2`, data).map(res => res.json());
   }
 
   getPackages() {

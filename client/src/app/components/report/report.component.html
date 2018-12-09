@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-body">
+
     <h5 class="card-title mb-4">Imported Packages</h5>
 
+    <!--
     <div class="table-responsive">
       <table class="table">
         <thead>
@@ -24,5 +26,39 @@
         </tbody>
       </table>
     </div>
+    -->
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Numero de Rastreo</th>
+            <th scope="col">Peso Kilogramos (Kg)</th>
+            <th scope="col">Peso Volumétrico (Kg)</th>
+            <th scope="col">Peso Total (Kg)</th>
+            <th scope="col">Fedex Peso Kilogramos (Kg)</th>
+            <th scope="col">Fedex Peso Volumétrico (Kg)</th>
+            <th scope="col">Fedex Peso Total (Kg)</th>
+            <th scope="col">Sobrepeso (Kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let package of packages" [ngClass]="{ 'no-overweight': package.sobrepeso > 0 }">
+            <td>{{ package.numero_rastreo }}</td>
+            <td>{{ package.peso_kilogramos }}</td>
+            <td>{{ package.peso_volumetrico }}</td>
+            <td><strong>{{ package.peso_total }}</strong></td>
+            <td>{{ package.fedex_peso_kilogramos }}</td>
+            <td>{{ package.fedex_peso_volumetrico }}</td>
+            <td><strong>{{ package.fedex_peso_total }}</strong></td>
+            <td>
+              <div *ngIf="package.sobrepeso <= 0">{{ 'No tiene sobrepeso' }}</div>
+              <div *ngIf="package.sobrepeso > 0">{{ package.sobrepeso }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </div>

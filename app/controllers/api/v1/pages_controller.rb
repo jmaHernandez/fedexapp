@@ -1,4 +1,6 @@
 class Api::V1::PagesController < ApplicationController
+	include Utils
+
 	skip_before_action :verify_authenticity_token
 
 	def test
@@ -50,7 +52,7 @@ class Api::V1::PagesController < ApplicationController
 		render :json => rate
 	end
 
-	def uploadPackages
+	def uploadPackagesV1
 		file = params[:packages].read
 		data = JSON.parse(file)
 
@@ -134,7 +136,7 @@ class Api::V1::PagesController < ApplicationController
 
 			sobrepeso = (carga_total - peso_total).ceil
 
-			@user = Package.new(
+			@package = Package.new(
 				shipper: shipper[:name],
 				recipient: recipient[:name],
 				total_weight: peso_total,
@@ -142,10 +144,102 @@ class Api::V1::PagesController < ApplicationController
 				overweight: sobrepeso
 			)
 
-			@user.save
+			@package.save
 		end
 		
 		render :json => Package.all
+	end
+
+	def uploadPackagesV2
+		file = params[:packages].read
+		data = JSON.parse(file)
+
+		fedex = Fedex::Shipment.new(
+			:key => 'VDcptYMyyET3QZGL',
+			:password => '3sET3ECzhTLcVGltPcpR5sKpv',
+			:account_number => '510087429',
+			:meter => '118729277',
+			:mode => 'test'
+		)
+
+		data.each do |package|
+			tracking_number = package['tracking_number']
+
+			# pp tracking_number
+
+			peso_kilogramos = CalcularPesoKilogramos(
+				package['weight']['value'],
+				package['weight']['units']
+			)
+			
+			peso_volumetrico = CalcularPesoVolumetrico(
+				package['dimensions']['width'],
+				package['dimensions']['height'],
+				package['dimensions']['length'],
+				package['dimensions']['units']
+			)
+
+			peso_total = peso_kilogramos
+
+			if peso_volumetrico > peso_total
+				peso_total = peso_volumetrico
+			end
+
+			# pp peso_kilogramos
+			# pp peso_volumetrico
+			# pp peso_total
+
+			begin
+				results = fedex.track(:tracking_number => tracking_number)
+			rescue
+				next
+			end
+
+			tracking_info = results.first
+
+			# tracking_info
+
+			fedex_peso_kilogramos = CalcularPesoKilogramos(
+				tracking_info.details[:package_weight][:value].to_f,
+				tracking_info.details[:package_weight][:units].to_s
+			)
+			
+			fedex_peso_volumetrico = CalcularPesoVolumetrico(
+				tracking_info.details[:package_dimensions][:width].to_f,
+				tracking_info.details[:package_dimensions][:height].to_f,
+				tracking_info.details[:package_dimensions][:length].to_f,
+				tracking_info.details[:package_dimensions][:units].to_s
+			)
+
+			fedex_peso_total = fedex_peso_kilogramos
+
+			if fedex_peso_volumetrico > fedex_peso_total
+				fedex_peso_total = fedex_peso_volumetrico
+			end
+
+			# pp fedex_peso_kilogramos
+			# pp fedex_peso_volumetrico
+			# pp fedex_peso_total
+
+			sobrepeso = CalcularSobrepeso(peso_total, fedex_peso_total)
+
+			# pp sobrepeso
+
+			@package = Package.new(
+				numero_rastreo: tracking_number,
+				peso_kilogramos: peso_kilogramos,
+				peso_volumetrico: peso_volumetrico,
+				peso_total: peso_total,
+				fedex_peso_kilogramos: fedex_peso_kilogramos,
+				fedex_peso_volumetrico: fedex_peso_volumetrico,
+				fedex_peso_total: fedex_peso_total,
+				sobrepeso: sobrepeso
+			)
+
+			@package.save
+		end
+
+		render :json => data
 	end
 
 	def getPackages

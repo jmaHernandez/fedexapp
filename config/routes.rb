@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :api, :defaults => { :format => :json } do
 		namespace :v1 do
 			get 'pages/test', to: 'pages#test'
-			post 'pages/uploadPackages', to: 'pages#uploadPackages'
+			post 'pages/uploadPackagesV2', to: 'pages#uploadPackagesV2'
 			get 'pages/getPackages', to: 'pages#getPackages'
 		end
 	end
